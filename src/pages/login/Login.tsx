@@ -60,7 +60,7 @@ export function Login() {
         console.log(data);
 
         const exists = data.some(
-          (item) => item.username === credentials.username || item.password === credentials.password
+          (item) => item.username === credentials.username && item.password === credentials.password
         );
         if (exists) {
             setlogged("it's ok!!!");
