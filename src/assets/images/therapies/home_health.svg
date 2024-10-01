@@ -1,0 +1,10 @@
+<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="home_health">
+<mask id="mask0_1050_152" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="25">
+<rect id="Bounding box" x="0.333252" y="0.5" width="24" height="24" fill="#D9D9D9"/>
+</mask>
+<g mask="url(#mask0_1050_152)">
+<path id="home_health_2" d="M11.0833 17.2502H13.5833V14.7502H16.0833V12.2502H13.5833V9.75022H11.0833V12.2502H8.58325V14.7502H11.0833V17.2502ZM4.83325 21.0002V9.75022L12.3333 4.11572L19.8333 9.75022V21.0002H4.83325ZM6.33325 19.5002H18.3333V10.5002L12.3333 6.00022L6.33325 10.5002V19.5002Z" fill="#B3B3B3"/>
+</g>
+</g>
+</svg>
