@@ -26,18 +26,24 @@
   }
   
   .listTextfield {
-    display: flex;
-    flex-direction: column;
   
+    display: flex;
+     flex-direction: column;
     align-items: center;
-    gap: 15px;
-    align-self: stretch;
+      gap: 15px;
+      align-self: stretch;
+      height: 300px;
+      
+      overflow-y: auto;
+      
+  
   }
+  
   
   .addContainer {
     display: flex;
     justify-content: right;
-    margin-top: 200px;
+    margin-top: 20px;
     margin-bottom: 20px;
   }
 

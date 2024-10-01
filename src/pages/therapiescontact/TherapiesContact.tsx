@@ -26,6 +26,7 @@ interface IContacts {
 
 export default function TherapiesContact() {
   const [contacts, setContacts] = useState<IContacts[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   const getContacts = async (): Promise<void> => {
     const result = await fetch("http://localhost:3000/contacts");
@@ -41,6 +42,10 @@ export default function TherapiesContact() {
     return contacts.length === 0;
   }
 
+  const filteredContacts = contacts?.filter((contact) =>
+    contact.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    contact.profession.toLowerCase().includes(searchQuery.toLowerCase())
+  )
   return (
     <div className="container">
       <Typography className="typography"> Contacts </Typography>
@@ -59,6 +64,8 @@ export default function TherapiesContact() {
           <InputBase
             sx={{ ml: 1, flex: 1 }}
             placeholder="Search doctor"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
             inputProps={{ "aria-label": "search google maps" }}
           />
           <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
@@ -70,7 +77,7 @@ export default function TherapiesContact() {
           {empthyContacts(contacts) ? (
             <Typography>There is not have contacts</Typography>
           ) : (
-            contacts.map((contact) => (
+            filteredContacts.map((contact) => (
               <Paper
                 key={contact.id}
                 component="form"
