@@ -6,6 +6,7 @@ import {
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/login/Login";
 import Therapies from "./pages/therapies/Therapies";
+import TherapiesContact from "./pages/therapiescontact/TherapiesContact";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,11 @@ const router = createBrowserRouter([
   {
     path: "/therapies",
     element: <Therapies/>,
+  },
+
+  {
+    path: "/therapiescontact",
+    element: <TherapiesContact/>,
   },
 
   {

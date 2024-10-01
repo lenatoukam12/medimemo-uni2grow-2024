@@ -3,9 +3,8 @@ import { Paper, Typography, IconButton, InputBase, Button } from '@mui/material'
 import Search from '../../assets/images/therapies/Icon.svg';
 import Superieur from '../../assets/images/therapies/arrow_forward_ios.svg';
 import AddCircle from '../../assets/images/therapies/add_circle.svg';
-import "./therapies.css";
+import "./Therapies.css";
 import { Foot } from '../../components/foot/Foot';
-
 
 export default function Therapies() {
 
