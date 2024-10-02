@@ -12,33 +12,30 @@ import AddCircle from "../../assets/images/therapies/add_circle.svg";
 import Stethoscope from "../../assets/images/therapiescontact/stethoscope.svg";
 import "./TherapiesContact.css";
 import { useEffect, useState } from "react";
+import {IContact} from "../../models/Contacts";
 
-interface IContacts {
-  id: number;
-  name: string;
-  qualification: string;
-  phone: string;
-  email: string;
-  address: string;
-  profession: string;
-  notes: string;
-}
 
 export default function TherapiesContact() {
-  const [contacts, setContacts] = useState<IContacts[]>([]);
+  const [contacts, setContacts] = useState<IContact[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [errors, setErrors] = useState<string>("");
 
   const getContacts = async (): Promise<void> => {
+    try{
     const result = await fetch("http://localhost:3000/contacts");
-    const datas: IContacts[] = await result.json();
+    const datas: IContact[] = await result.json();
     setContacts(datas);
+   }
+   catch(error){
+    setErrors("Failed to load data")
+   }
   };
 
   useEffect(() => {
     getContacts();
   }, []);
 
-  function empthyContacts(contacts: IContacts[]): boolean {
+  function empthyContacts(contacts: IContact[]): boolean {
     return contacts.length === 0;
   }
 
@@ -77,7 +74,7 @@ export default function TherapiesContact() {
           {empthyContacts(contacts) ? (
             <Typography>There is not have contacts</Typography>
           ) : (
-            filteredContacts.map((contact) => (
+            filteredContacts.map((contact: IContact) => (
               <Paper
                 key={contact.id}
                 component="form"
