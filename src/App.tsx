@@ -8,11 +8,16 @@ import Contacts from "./pages/contacts/Contacts.tsx";
 import Login from "./pages/login/Login";
 import { Medications } from "./pages/medications/Medications.tsx";
 import { Therapies } from "./pages/therapies/Therapies.tsx";
+import AddEditContact from "./pages/contacts/actions/AddEditContact.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/addeditcontact",
+    element: <AddEditContact />,
   },
   {
     path: "/",
@@ -29,6 +34,7 @@ const router = createBrowserRouter([
       {
         path: "/contacts",
         element: <Contacts />,
+      
       },
       {
         path: "/Therapies",

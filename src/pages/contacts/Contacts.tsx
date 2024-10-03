@@ -1,5 +1,6 @@
-import { IconButton, InputBase, Paper, Typography } from "@mui/material";
+import { IconButton, InputBase, Paper, Typography, Button } from "@mui/material";
 import "./Contacts.css";
+import { useNavigate } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 import search from "../../assets/images/contact/Icon.svg";
@@ -13,11 +14,14 @@ function Contacts() {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [error, setError] = useState<string>("");
 
+  const navigate = useNavigate();
+
   const getContacts = async (): Promise<void> => {
     try {
       const result = await fetch("http://localhost:3000/contacts");
       const datas: IContact[] = await result.json();
       setContacts(datas);
+      
     } catch (error) {
       setError("failed to load contacts");
     }
@@ -29,7 +33,7 @@ function Contacts() {
 
   const filteredContacts = contacts?.filter(
     (contact: IContact) =>
-      contact.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      contact.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       contact.profession.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -130,7 +134,9 @@ function Contacts() {
       
 
       <div className="addContainer">
-        <img src={add} alt="add icon" />
+        <Button onClick= {() => {navigate("/addeditcontact")}}  type="submit"  >         
+          <img src={add} alt="add icon" />
+        </Button>
       </div>
     </>
   );
