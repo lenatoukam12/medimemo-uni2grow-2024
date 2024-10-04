@@ -47,14 +47,14 @@ export default function AddEditContact() {
     email: false,
     address: false,
     notes: false,
-  }); 
-  
-  const handleLabelNable = (field: keyof IContact)=> {
+  });
+
+  const handleLabelNable = (field: keyof IContact) => {
     setLabelNable({
-        ...labelNable,
-        [field]: true,
+      ...labelNable,
+      [field]: true,
     });
-  }
+  };
 
   const navigate = useNavigate();
 
@@ -80,19 +80,20 @@ export default function AddEditContact() {
     const error = validationContactField(fieldName, value);
 
     setContact({
-        ...contact,
-        [fieldName]: value,
-      });
+      ...contact,
+      [fieldName]: value,
+    });
 
     setErrors((prevState) => ({
       ...prevState,
       [fieldName]: error || "",
     }));
-
   };
 
- const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-        e.preventDefault();
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
+    e.preventDefault();
 
     // Validate the entire form before proceeding
     const validationErrors = validateContactForm(contact);
@@ -145,161 +146,171 @@ export default function AddEditContact() {
 
   return (
     <>
-    
       <div className="container">
-      <div className="headerContainer">
-          <IconButton type="button" sx={{ p: "10px" }} aria-label="arrowBack">
+        <div className="headerContainer">
+          <IconButton
+            type="button"
+            sx={{ paddingLeft: "0px" }}
+            aria-label="arrowBack"
+          >
             <ArrowBackIcon />
           </IconButton>
-          <Typography className="textTypography" paddingLeft={15}>
+          <Typography className="textTypography" paddingLeft={0}>
             New doctor
           </Typography>
         </div>
         <div className="infoContact">
           <form onSubmit={handleSubmit}>
+            <div className="infoContent">
             <div className="listInfo">
-            <TextField
-              id="outlined-basic"
-              onFocus={() => handleLabelNable("name")}
-              label= {labelNable.name ? "Name" : ""}
-              name="name"
-              value={contact.name}
-              onChange={handleChange}
-              error={!!errors.name}
-              helperText={errors.name}
-              sx={{ width: "100%", color: "Primary", marginBottom: 2 }}
-              slotProps={{
-                input: {
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <img src={Stethoscope} alt="stethoscope" />
-                      <Typography  sx={{
-                          fontSize: 14,
-                          fontWeight: 400,
-                          
-                          fontStyle: "normal",
-                          color: "#444"
-                        }}
-                        paddingLeft={2} >Dr.</Typography>
-                    </InputAdornment>
-                  ),
-                },
-              }}
-              variant="outlined"
-            />
-            <TextField
-              id="outlined-basic"
-              onFocus={() => handleLabelNable("profession")}
-              label= {labelNable.profession ? "Specialty" : ""}
-              name="profession"
-              value={contact.profession}
-              onChange={handleChange}
-              error={!!errors.profession}
-              helperText={errors.profession}
-              placeholder="Specialty"
-              sx={{ width: "100%", color: "Primary", marginBottom: 2 }}
-              slotProps={{
-                input: {
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <img src={Specialty} alt="specialty" />
-                    </InputAdornment>
-                  ),
-                },
-              }}
-              variant="outlined"
-            />
-            <TextField
-              id="outlined-basic"
-              onFocus={() => handleLabelNable("phone")}
-              label= {labelNable.phone ? "Phone number" : ""}
-              name="phone"
-              value={contact.phone}
-              onChange={handleChange}
-              error={!!errors.phone}
-              helperText={errors.phone}
-              placeholder="Phone number"
-              sx={{ width: "100%", color: "Primary", marginBottom: 2 }}
-              slotProps={{
-                input: {
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <img src={Call} alt="call" />
-                    </InputAdornment>
-                  ),
-                },
-              }}
-              variant="outlined"
-            />
-            <TextField
-              id="outlined-basic"
-              onFocus={() => handleLabelNable("email")}
-              label= {labelNable.email ? "E-mail" : ""}
-              name="email"
-              type="email"
-              value={contact.email}
-              onChange={handleChange}
-              error={!!errors.email}
-              helperText={errors.email}
-              placeholder="E-mail"
-              sx={{ width: "100%", color: "Primary", marginBottom: 2 }}
-              slotProps={{
-                input: {
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <img src={Mail} alt="mail" />
-                    </InputAdornment>
-                  ),
-                },
-              }}
-              variant="outlined"
-            />
-            <TextField
-              id="outlined-basic"
-              onFocus={() => handleLabelNable("address")}
-              label= {labelNable.address ? "Address" : ""}
-              name="address"
-              value={contact.address}
-              onChange={handleChange}
-              error={!!errors.address}
-              helperText={errors.address}
-              placeholder="Address"
-              sx={{ width: "100%", color: "Primary", marginBottom: 2 }}
-              slotProps={{
-                input: {
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <img src={Location} alt="location" />
-                    </InputAdornment>
-                  ),
-                },
-              }}
-              variant="outlined"
-            />
-            <TextField
-              id="outlined-basic"
-              onFocus={() => handleLabelNable("notes")}
-              label= {labelNable.notes ? "Notes" : ""}
-              name="notes"
-              value={contact.notes}
-              onChange={handleChange}
-              error={!!errors.notes}
-              helperText={errors.notes}
-              placeholder="Notes"
-              sx={{ width: "100%", color: "Primary", marginBottom: 2 }}
-              slotProps={{
-                input: {
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <img src={Note} alt="note" />
-                    </InputAdornment>
-                  ),
-                },
-              }}
-              variant="outlined"
-            />
+              <TextField
+                id="outlined-basic"
+                onFocus={() => handleLabelNable("name")}
+                label={labelNable.name ? "Name" : ""}
+                name="name"
+                value={contact.name}
+                onChange={handleChange}
+                error={!!errors.name}
+                helperText={errors.name}
+                sx={{ width: "100%", color: "Primary", marginBottom: 2 }}
+                slotProps={{
+                  input: {
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <img src={Stethoscope} alt="stethoscope" />
+                        <Typography
+                          sx={{
+                            fontSize: 14,
+                            fontWeight: 400,
+
+                            fontStyle: "normal",
+                            color: "#444",
+                          }}
+                          paddingLeft={2}
+                        >
+                          Dr.
+                        </Typography>
+                      </InputAdornment>
+                    ),
+                  },
+                }}
+                variant="outlined"
+              />
+              <TextField
+                id="outlined-basic"
+                onFocus={() => handleLabelNable("profession")}
+                label={labelNable.profession ? "Specialty" : ""}
+                name="profession"
+                value={contact.profession}
+                onChange={handleChange}
+                error={!!errors.profession}
+                helperText={errors.profession}
+                placeholder="Specialty"
+                sx={{ width: "100%", color: "Primary", marginBottom: 2 }}
+                slotProps={{
+                  input: {
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <img src={Specialty} alt="specialty" />
+                      </InputAdornment>
+                    ),
+                  },
+                }}
+                variant="outlined"
+              />
+              <TextField
+                id="outlined-basic"
+                onFocus={() => handleLabelNable("phone")}
+                label={labelNable.phone ? "Phone number" : ""}
+                name="phone"
+                value={contact.phone}
+                onChange={handleChange}
+                error={!!errors.phone}
+                helperText={errors.phone}
+                placeholder="Phone number"
+                sx={{ width: "100%", color: "Primary", marginBottom: 2 }}
+                slotProps={{
+                  input: {
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <img src={Call} alt="call" />
+                      </InputAdornment>
+                    ),
+                  },
+                }}
+                variant="outlined"
+              />
+              <TextField
+                id="outlined-basic"
+                onFocus={() => handleLabelNable("email")}
+                label={labelNable.email ? "E-mail" : ""}
+                name="email"
+                type="email"
+                value={contact.email}
+                onChange={handleChange}
+                error={!!errors.email}
+                helperText={errors.email}
+                placeholder="E-mail"
+                sx={{ width: "100%", color: "Primary", marginBottom: 2 }}
+                slotProps={{
+                  input: {
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <img src={Mail} alt="mail" />
+                      </InputAdornment>
+                    ),
+                  },
+                }}
+                variant="outlined"
+              />
+              <TextField
+                id="outlined-basic"
+                onFocus={() => handleLabelNable("address")}
+                label={labelNable.address ? "Address" : ""}
+                name="address"
+                value={contact.address}
+                onChange={handleChange}
+                error={!!errors.address}
+                helperText={errors.address}
+                placeholder="Address"
+                sx={{ width: "100%", color: "Primary", marginBottom: 2 }}
+                slotProps={{
+                  input: {
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <img src={Location} alt="location" />
+                      </InputAdornment>
+                    ),
+                  },
+                }}
+                variant="outlined"
+              />
+              <TextField
+                id="outlined-basic"
+                onFocus={() => handleLabelNable("notes")}
+                label={labelNable.notes ? "Notes" : ""}
+                name="notes"
+                value={contact.notes}
+                onChange={handleChange}
+                error={!!errors.notes}
+                helperText={errors.notes}
+                placeholder="Notes"
+                sx={{ width: "100%", color: "Primary", marginBottom: 2 }}
+                slotProps={{
+                  input: {
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <img src={Note} alt="note" />
+                      </InputAdornment>
+                    ),
+                  },
+                }}
+                variant="outlined"
+              />
             </div>
-            
+            </div>
+           
+
             <div className="saveContainer">
               <Button
                 className="saveButton"
