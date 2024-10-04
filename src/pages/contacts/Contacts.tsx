@@ -1,6 +1,6 @@
 import { IconButton, InputBase, Paper, Typography, Button } from "@mui/material";
 import "./Contacts.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 import search from "../../assets/images/contact/Icon.svg";
@@ -15,12 +15,18 @@ function Contacts() {
   const [error, setError] = useState<string>("");
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const getContacts = async (): Promise<void> => {
     try {
       const result = await fetch("http://localhost:3000/contacts");
       const datas: IContact[] = await result.json();
-      setContacts(datas);
+
+      if (location.state?.newContact) {
+        setContacts([location.state.newContact, ...datas]);
+      }else {
+        setContacts(datas);
+      }
       
     } catch (error) {
       setError("failed to load contacts");

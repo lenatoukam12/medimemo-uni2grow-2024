@@ -1,5 +1,5 @@
-import { TextField, Typography, Button } from "@mui/material";
-import { ArrowBack } from "@mui/icons-material";
+import { TextField, Typography, Button, IconButton } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import InputAdornment from "@mui/material/InputAdornment";
 import Stethoscope from "../../../assets/images/contact/addeditcontact/stethoscope (1).svg";
 import Specialty from "../../../assets/images/contact/addeditcontact/clinical_notes.svg";
@@ -110,7 +110,7 @@ export default function AddEditContact() {
         qualification: "Dr",
         profession: contact.profession,
         phone: contact.phone,
-        email: contact.mail,
+        email: contact.email,
         address: contact.address,
       };
 
@@ -133,7 +133,8 @@ export default function AddEditContact() {
           address: "",
         });
         //alert("Contact added successfully!");
-        navigate("/contacts");
+        const savedContact = await response.json(); // Get the saved contact with the ID
+        navigate("/contacts", { state: { newContact: savedContact } });
       } else {
         alert("Error adding contact.");
       }
@@ -144,11 +145,15 @@ export default function AddEditContact() {
 
   return (
     <>
-      {" "}
+    
       <div className="container">
-        <div className="header">
-          <ArrowBack />
-          <Typography className="textTypography">New doctor</Typography>
+      <div className="headerContainer">
+          <IconButton type="button" sx={{ p: "10px" }} aria-label="arrowBack">
+            <ArrowBackIcon />
+          </IconButton>
+          <Typography className="textTypography" paddingLeft={15}>
+            New doctor
+          </Typography>
         </div>
         <div className="infoContact">
           <form onSubmit={handleSubmit}>
