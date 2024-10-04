@@ -1,10 +1,9 @@
-import { IconButton, InputBase, Paper, Typography, Button } from "@mui/material";
+import { IconButton, InputBase, Paper, Typography } from "@mui/material";
 import "./Contacts.css";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 import search from "../../assets/images/contact/Icon.svg";
-import add from "../../assets/images/contact/add_circle.svg";
 import arrowBack from "../../assets/images/contact/arrow_forward_ios.svg";
 import stethoscope from "../../assets/images/contact/stethoscope.svg";
 import { IContact } from "../../models/Contact";
@@ -15,7 +14,7 @@ function Contacts() {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [error, setError] = useState<string>("");
 
-  const navigate = useNavigate();
+
   const location = useLocation();
 
   const getContacts = async (): Promise<void> => {

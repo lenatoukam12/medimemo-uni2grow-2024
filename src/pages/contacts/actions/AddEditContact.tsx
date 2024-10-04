@@ -152,6 +152,8 @@ export default function AddEditContact() {
             type="button"
             sx={{ paddingLeft: "0px" }}
             aria-label="arrowBack"
+
+            onClick={() =>{navigate("/contacts")}}
           >
             <ArrowBackIcon />
           </IconButton>

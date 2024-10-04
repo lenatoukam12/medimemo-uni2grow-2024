@@ -131,6 +131,16 @@
       "phone": "5678666666",
       "email": "arnaud@gmail.com",
       "address": "foroke"
+    },
+    {
+      "id": "400e",
+      "name": "cindy feukou",
+      "notes": "Bon medecin",
+      "qualification": "Dr",
+      "profession": "ophthalmologist",
+      "phone": "555555",
+      "email": "cindy@gmail.com",
+      "address": "ari"
     }
   ],
   "prescriptions": [
