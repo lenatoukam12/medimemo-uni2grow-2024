@@ -8,6 +8,7 @@ import add from "../../assets/images/contact/add_circle.svg";
 import arrowBack from "../../assets/images/contact/arrow_forward_ios.svg";
 import stethoscope from "../../assets/images/contact/stethoscope.svg";
 import { IContact } from "../../models/Contact";
+import FabAdd from "../../components/fabAddButton/FabAddButton";
 
 function Contacts() {
   const [contacts, setContacts] = useState<IContact[]>([]);
@@ -137,13 +138,10 @@ function Contacts() {
             )}
           </div>
         </div>
-      
+        <div className="addContainer">
+          <FabAdd  path="/addeditcontact"/>
 
-      <div className="addContainer">
-        <Button onClick= {() => {navigate("/addeditcontact")}}  type="submit"  >         
-          <img src={add} alt="add icon" />
-        </Button>
-      </div>
+        </div>
     </>
   );
 }
