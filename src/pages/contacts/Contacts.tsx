@@ -129,6 +129,7 @@ function Contacts() {
                     type="button"
                     sx={{ p: "10px" }}
                     aria-label="arrowBack"
+                    onClick= {() => {navigate(`/viewContact/${contact.id}`)}}
                   >
                     <img src={arrowBack} alt="arrowBack icon" />
                   </IconButton>
