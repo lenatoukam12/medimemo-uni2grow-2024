@@ -11,6 +11,7 @@ import Medication from "./pages/medications/Medication";
 import Dashboard from "./pages/Dashboard";
 import AddEditContact from "./pages/contacts/actions/AddEditContact.tsx";
 import ViewContact from "./pages/contacts/viewContact/ViewContact.tsx";
+import EditContact from "./pages/editContact/editContact.tsx";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "/viewContact/:id",
         element: <ViewContact />,
+      },
+      {
+        path: "/editContact/:id",
+        element: <EditContact />,
       },
       {
         path: "/medications",

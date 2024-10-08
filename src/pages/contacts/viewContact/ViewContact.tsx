@@ -1,12 +1,4 @@
-import {
-  Button,
-  IconButton,
-  InputAdornment,
-  TextField,
-  Typography,
-} from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import Edit from "../../../assets/images/viewContact/more_vert.svg";
+import { Button, Typography } from "@mui/material";
 import CallPhone from "../../../assets/images/viewContact/white_call (1).svg";
 import Email from "../../../assets/images/viewContact/white_mail (1).svg";
 import View from "../../../assets/images/viewContact/white_location_on (1).svg";
@@ -64,7 +56,7 @@ export default function ViewContact() {
           }}
           showRightButton={true}
           onRightButtonClick={() => {
-            navigate(`/addEditContact/${id} `);
+            navigate(`/editContact/${contact?.id}`);
           }}
         />
       </div>
@@ -84,104 +76,95 @@ export default function ViewContact() {
           {contact?.profession}
         </Typography>
       </div>
+      <div className="formContenair">
+        <div className="headerForm">
+          <Button>
+            <div className="boxInfos">
+              <img color="white" src={CallPhone} alt="call" />
+              <Typography sx={{ color: "white", textTransform: "capitalize" }}>
+                Ring
+              </Typography>
+            </div>
+          </Button>
 
-      <div className="viewcontainer">
-        <div className="formContenair">
-          <div className="headerForm">
-            <Button>
-              <div className="boxInfos">
-                <img color="white" src={CallPhone} alt="call" />
-                <Typography
-                  sx={{ color: "white", textTransform: "capitalize" }}
-                >
-                  Ring
-                </Typography>
-              </div>
-            </Button>
+          <Button>
+            <div className="boxInfos">
+              <img color="white" src={Email} alt="email" />
+              <Typography sx={{ color: "white", textTransform: "capitalize" }}>
+                E-mail
+              </Typography>
+            </div>
+          </Button>
 
-            <Button>
-              <div className="boxInfos">
-                <img color="white" src={Email} alt="email" />
-                <Typography
-                  sx={{ color: "white", textTransform: "capitalize" }}
-                >
-                  E-mail
-                </Typography>
-              </div>
-            </Button>
-
-            <Button>
-              <div className="boxInfos">
-                <img color="white" src={View} alt="location" />
-                <Typography
-                  sx={{ color: "white", textTransform: "capitalize" }}
-                >
-                  View
-                </Typography>
-              </div>
-            </Button>
+          <Button>
+            <div className="boxInfos">
+              <img color="white" src={View} alt="location" />
+              <Typography sx={{ color: "white", textTransform: "capitalize" }}>
+                View
+              </Typography>
+            </div>
+          </Button>
+        </div>
+        <div className="bodyForm">
+          <div className="doctorProps">
+            <img src={Call} alt="call" />
+            <Typography
+              sx={{
+                paddingTop: 0.1,
+                // fontFamily: "Open Sans",
+                fontSize: 14,
+                fontWeight: 400,
+                lineHeight: 2,
+              }}
+            >
+              {contact?.phone}
+            </Typography>
           </div>
-          <div className="bodyForm">
-            <div className="doctorProps">
-              <img src={Call} alt="call" />
-              <Typography
-                sx={{
-                  paddingTop: 0.1,
-                  // fontFamily: "Open Sans",
-                  fontSize: 14,
-                  fontWeight: 400,
-                  lineHeight: 2,
-                }}
-              >
-                {contact?.phone}
-              </Typography>
-            </div>
 
-            <div className="doctorProps">
-              <img src={Mail} alt="mail" />
-              <Typography
-                sx={{
-                  paddingTop: 0.1,
-                  color: "#444444",
-                  fontSize: 14,
-                  fontWeight: 400,
-                  lineHeight: 2,
-                }}
-              >
-                {contact?.email}
-              </Typography>
-            </div>
+          <div className="doctorProps">
+            <img src={Mail} alt="mail" />
+            <Typography
+              sx={{
+                paddingTop: 0.1,
+                color: "#444444",
+                fontSize: 14,
+                fontWeight: 400,
+                lineHeight: 2,
+              }}
+            >
+              {contact?.email}
+            </Typography>
+          </div>
 
-            <div className="doctorProps">
-              <img src={Location} alt="location" />
-              <Typography
-                sx={{
-                  paddingTop: 0.1,
-                  color: "#444444",
-                  fontSize: 14,
-                  fontWeight: 400,
-                  lineHeight: 2,
-                }}
-              >
-                {contact?.address}
-              </Typography>
-            </div>
-            <div className="doctorProps">
-              <img src={Note} alt="note" />
-              <Typography
-                sx={{
-                  paddingTop: 0.1,
-                  color: "#444444",
-                  fontSize: 14,
-                  fontWeight: 400,
-                  lineHeight: 2,
-                }}
-                width={240}
-                height="auto"
-              >
-                {contact?.notes}
-              </Typography>
-            </div>
+          <div className="doctorProps">
+            <img src={Location} alt="location" />
+            <Typography
+              sx={{
+                paddingTop: 0.1,
+                color: "#444444",
+                fontSize: 14,
+                fontWeight: 400,
+                lineHeight: 2,
+              }}
+            >
+              {contact?.address}
+            </Typography>
+          </div>
+          <div className="doctorProps">
+            <img src={Note} alt="note" />
+            <Typography
+              sx={{
+                paddingTop: 0.1,
+                color: "#444444",
+                fontSize: 14,
+                fontWeight: 400,
+                lineHeight: 2,
+              }}
+              width={240}
+              height="auto"
+            >
+              {contact?.notes}
+            </Typography>
           </div>
         </div>
       </div>
