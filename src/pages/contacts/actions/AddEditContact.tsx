@@ -146,7 +146,7 @@ export default function AddEditContact() {
 
   return (
     <>
-      <div className="container">
+      <div className="add-container">
         <div className="headerContainer">
           <IconButton
             type="button"
