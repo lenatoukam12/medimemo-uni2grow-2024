@@ -37,26 +37,33 @@ padding-bottom: 10px;
 }
 
 .formContenair{
-    display: flex;
-    padding: 10px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* gap: 10px; */
-    align-self: stretch;
-    border-radius: var(--Radius-sm, 8px);
-    background: var(--Colours-White, #fff);
+flex: 1;
+overflow-y: auto;
+
 }
 .headerForm{
     display: flex;
-    flex-direction: row;
-    /* justify-content: center; */
-    gap: 15px;
-    margin-bottom: 10px;
-    margin-top: 20px;
-    height: 80px;
+    padding: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* gap: 10px; */
+  align-self: stretch;
+  border-radius: var(--Radius-sm, 8px);
+  background: var(--Colours-White, #fff);
 
 }
+
+.boxDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+    height: 80px;
+}
+
 .boxInfos {
     display: flex;
     padding: 16px;
@@ -69,7 +76,7 @@ padding-bottom: 10px;
     background: var(--Primary, #f00);
     height: 60px;
     width: 60px;
-}
+  }
 
 .bodyForm{
     display: flex;

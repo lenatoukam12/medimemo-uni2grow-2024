@@ -12,6 +12,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import "./ViewContact.css";
 import Header from "../../../components/header/Header";
+import EditBox from "../../../components/editBox/EditBox";
 
 export default function ViewContact() {
   const { id } = useParams<{ id?: string }>();
@@ -45,6 +46,9 @@ export default function ViewContact() {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error</div>;
 
+
+  const EditBoxView: string = `/addeditcontact/${id}`;
+
   return (
     <>
       <div>
@@ -55,9 +59,7 @@ export default function ViewContact() {
             navigate("/contacts");
           }}
           showRightButton={true}
-          onRightButtonClick={() => {
-            navigate(`/editContact/${contact?.id}`);
-          }}
+          RightButton= {<EditBox edit={EditBoxView}/>}
         />
       </div>
 
@@ -78,33 +80,35 @@ export default function ViewContact() {
       </div>
       <div className="formContenair">
         <div className="headerForm">
-          <Button>
+         <div className="boxDiv">
+        
             <div className="boxInfos">
               <img color="white" src={CallPhone} alt="call" />
               <Typography sx={{ color: "white", textTransform: "capitalize" }}>
                 Ring
               </Typography>
             </div>
-          </Button>
+        
 
-          <Button>
+         
             <div className="boxInfos">
               <img color="white" src={Email} alt="email" />
               <Typography sx={{ color: "white", textTransform: "capitalize" }}>
                 E-mail
               </Typography>
             </div>
-          </Button>
+         
 
-          <Button>
+          
             <div className="boxInfos">
               <img color="white" src={View} alt="location" />
               <Typography sx={{ color: "white", textTransform: "capitalize" }}>
                 View
               </Typography>
             </div>
-          </Button>
-        </div>
+         
+          </div>
+        
         <div className="bodyForm">
           <div className="doctorProps">
             <img src={Call} alt="call" />
@@ -166,6 +170,7 @@ export default function ViewContact() {
               {contact?.notes}
             </Typography>
           </div>
+        </div>
         </div>
       </div>
     </>

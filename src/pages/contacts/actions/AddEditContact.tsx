@@ -8,8 +8,8 @@ import Mail from "../../../assets/images/contact/addeditcontact/mail (1).svg";
 import Location from "../../../assets/images/contact/addeditcontact/location_on.svg";
 import Note from "../../../assets/images/contact/addeditcontact/sticky_note_2.svg";
 import Save from "../../../assets/images/contact/addeditcontact/save.svg";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import "./AddEditContact.css";
 import {} from "react";
 import {
@@ -22,6 +22,9 @@ import {
 import { IContact } from "../../../models/Contact";
 
 export default function AddEditContact() {
+  const [error, setError] = useState(null);
+  const { id } = useParams<{ id?: string }>();
+  const isEditing = !!id;
   const [contact, setContact] = useState<formValues>({
     name: "",
     profession: "",
@@ -57,22 +60,6 @@ export default function AddEditContact() {
   };
 
   const navigate = useNavigate();
-
-  //   useEffect(() => {
-  //     if (id) {
-  //       fetchContactData();
-  //     }
-  //   }, [id]);
-
-  //   const fetchContactData = async () => {
-  //     try {
-  //       const response = await fetch("http://localhost:3000/contacts/${id}");
-  //       const data: formValues = await response.json();
-  //       setContact(data);
-  //     } catch (error) {
-  //       console.error("Error fetching contact data:", error);
-  //     }
-  //   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const fieldName = e.target.name;
@@ -114,15 +101,23 @@ export default function AddEditContact() {
         email: contact.email,
         address: contact.address,
       };
-
-      // If validation passes, make the API call to submit the data
-      const response = await fetch("http://localhost:3000/contacts", {
+      let response;
+      if(isEditing){
+        response = await fetch(`http://localhost:3000/contacts/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newContact),
+        });
+      }else{// If validation passes, make the API call to submit the data
+      response = await fetch("http://localhost:3000/contacts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newContact),
-      });
+      });}
 
       if (response.ok) {
         setContact({
@@ -137,12 +132,37 @@ export default function AddEditContact() {
         const savedContact = await response.json(); // Get the saved contact with the ID
         navigate("/contacts", { state: { newContact: savedContact } });
       } else {
-        alert("Error adding contact.");
+        //alert("Error adding contact.");
+        navigate("/contacts");
       }
     } catch (error) {
       console.error("Error:", error);
     }
   };
+
+
+  useEffect (() => {
+    if(isEditing){
+    const fetchContact = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/contacts/${id}`);
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data: formValues = await response.json();
+        setContact(data);
+      } catch (err) {
+        setError(error);
+      }
+    };
+
+    fetchContact();
+  };
+  }, [id,isEditing]);
+
+  if (error) return <div>Error</div>;
+  
+
 
   return (
     <>

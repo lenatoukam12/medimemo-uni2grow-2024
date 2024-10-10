@@ -40,12 +40,12 @@ const router = createBrowserRouter([
         element: <AddEditContact />,
       },
       {
-        path: "/viewContact/:id",
-        element: <ViewContact />,
+        path: "/addeditcontact/:id",
+        element: <AddEditContact />,
       },
       {
-        path: "/editContact/:id",
-        element: <EditContact />,
+        path: "/viewContact/:id",
+        element: <ViewContact />,
       },
       {
         path: "/medications",

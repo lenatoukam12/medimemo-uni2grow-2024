@@ -23,8 +23,12 @@ function Contacts() {
       const result = await fetch("http://localhost:3000/contacts");
       const datas: IContact[] = await result.json();
 
-      if (location.state?.newContact) {
-        setContacts([location.state.newContact, ...datas]);
+      if (location.state && location.state?.newContact) {
+          const newStateContact = location.state?.newContact;
+          const NewDatas = datas.filter(contact => contact.id !== newStateContact.id);
+          NewDatas.unshift(newStateContact);
+
+        setContacts(NewDatas);
       }else {
         setContacts(datas);
       }
