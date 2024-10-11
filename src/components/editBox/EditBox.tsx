@@ -5,12 +5,16 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import React from "react";
 import {IEditBox} from "../../models/editBox";
 import { useNavigate } from "react-router-dom";
-
+import {DeleteBoxView} from "../deleteBox/DeleteBox";
+import ReportGmailerrorredIcon from '@mui/icons-material/ReportGmailerrorred';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ClearIcon from '@mui/icons-material/Clear';
 
 
 export default function EditBox(props:IEditBox): JSX.Element {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
+    const [openModal,setOpenModal] = React.useState<boolean>(false);
 
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
       setAnchorEl(event.currentTarget);
@@ -20,18 +24,28 @@ export default function EditBox(props:IEditBox): JSX.Element {
       setAnchorEl(null);
     };
     const navigate = useNavigate();
-    
+
     const handleEdit = () =>{
         if(props.edit){
             navigate(props.edit);
         }
+        handleClose();
     };
 
+    // const [open, setOpen] = React.useState(false);
+  
+    const handleExit = () => {
+      setOpenModal(false);
+    } 
+    const handleDelete = () => {
+      setOpenModal(true);
+      handleClose();
+    };
   
 
   return (
     <React.Fragment>
-        <Tooltip title="Account settings">
+        <Tooltip title="">
           <div onClick={handleClick}>
             <MoreVertIcon/>
           </div>
@@ -80,14 +94,28 @@ export default function EditBox(props:IEditBox): JSX.Element {
           </ListItemIcon >
           Edit
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleDelete} >
           <ListItemIcon>
             <CloseIcon />
           </ListItemIcon>
-          Delete
+          Delete 
 
         </MenuItem>
     </Menu>
+     {openModal &&  
+     <DeleteBoxView 
+      open={openModal} 
+      onDisagree={handleExit} 
+      title1="Deletion" 
+      title2="Confirmation" 
+      icon={<ReportGmailerrorredIcon />} 
+      body="Do you really want to delete this contact? Allentered data wil be lost and cannot be recovered." 
+      onAgree={handleExit} 
+      agreeIcon={<ClearIcon/>} 
+      disagreeIcon={<ArrowBackIosNewIcon />} 
+      agreeMessage="Delete " 
+      disagreeMessage="Back"/>}
+
     </React.Fragment>
     )
 }
