@@ -1,8 +1,7 @@
 export interface IMoreDelete {
     icon?: React.ReactNode;
     open: boolean;
-    title1: string;
-    title2?: string;
+    title: string;
     body: string;
     agreeMessage?:string;
     disagreeMessage:string;

@@ -81,16 +81,6 @@
       "id": "1"
     },
     {
-      "name": "",
-      "notes": "",
-      "qualification": "Dr",
-      "profession": "",
-      "phone": "",
-      "email": "",
-      "address": "",
-      "id": "2"
-    },
-    {
       "id": "3",
       "name": "John Smith",
       "qualification": "Dr",
@@ -99,36 +89,6 @@
       "address": "Yaounde, Cameroun",
       "profession": "Cardiologist",
       "notes": ""
-    },
-    {
-      "id": "4",
-      "name": "John Smith",
-      "qualification": "Dr",
-      "phone": "+237 677345741",
-      "email": "john@gmail.com",
-      "address": "Yaounde, Cameroun",
-      "profession": "Cardiologist",
-      "notes": ""
-    },
-    {
-      "id": "5",
-      "name": "John Smith",
-      "qualification": "Dr",
-      "phone": "+237 677345741",
-      "email": "john@gmail.com",
-      "address": "Yaounde, Cameroun",
-      "profession": "Cardiologist",
-      "notes": ""
-    },
-    {
-      "id": "5733",
-      "name": "lafortune tako",
-      "notes": "Bon medecin",
-      "qualification": "Dr",
-      "profession": "Neurologist",
-      "phone": "555555",
-      "email": "fortunetako@gmail.com",
-      "address": "foroke"
     },
     {
       "id": "7414",
@@ -151,56 +111,6 @@
       "address": "kelem"
     },
     {
-      "id": "28cd",
-      "name": "toto arnaud",
-      "notes": "Bon medecin",
-      "qualification": "Dr",
-      "profession": "Neurologist",
-      "phone": "5678666666",
-      "email": "arnaud@gmail.com",
-      "address": "foroke"
-    },
-    {
-      "id": "d28b",
-      "name": "Laura Thompson",
-      "notes": "wwwww",
-      "qualification": "Dr",
-      "profession": "Ophthalmologist",
-      "phone": "+237 674772916",
-      "email": "laura@gmail.com",
-      "address": "Douala, Cameroun"
-    },
-    {
-      "id": "27a2",
-      "name": "Laura Thompson",
-      "notes": "wwwwww",
-      "qualification": "Dr",
-      "profession": "Ophthalmologist",
-      "phone": "+237 674772928",
-      "email": "laura@gmail.com",
-      "address": "Douala, Cameroun"
-    },
-    {
-      "id": "2f48",
-      "name": "Laura Thompson",
-      "notes": "aaaaaaa",
-      "qualification": "Dr",
-      "profession": "Ophthalmologist",
-      "phone": "+237 674772917",
-      "email": "laura@gmail.com",
-      "address": "Douala, Cameroun"
-    },
-    {
-      "id": "c6c2",
-      "name": "Laura Thompson",
-      "notes": "tres motivee",
-      "qualification": "Dr",
-      "profession": "Ophthalmologist",
-      "phone": "+237 674772917",
-      "email": "laura@gmail.com",
-      "address": "Douala, Cameroun"
-    },
-    {
       "id": "23d4",
       "name": "Laura Thompson",
       "notes": "Bon medecin",
@@ -209,36 +119,6 @@
       "phone": "+237 674772928",
       "email": "laura@gmail.com",
       "address": "Douala, Cameroun"
-    },
-    {
-      "id": "c932",
-      "name": "Sarah Davis",
-      "notes": "vvvvvv",
-      "qualification": "Dr",
-      "profession": "Pediatrician",
-      "phone": "+237 656585534",
-      "email": "davis@gmail.com",
-      "address": "Dschang, Cameroun"
-    },
-    {
-      "id": "4481",
-      "name": "Sarah Davis",
-      "notes": "klihlo",
-      "qualification": "Dr",
-      "profession": "Pediatrician",
-      "phone": "+237 19",
-      "email": "davis@gmail.com",
-      "address": "Dschang, Cameroun"
-    },
-    {
-      "id": "cc49",
-      "name": "Sarah Davis",
-      "notes": "klp;",
-      "qualification": "Dr",
-      "profession": "Pediatrician",
-      "phone": "+237 20",
-      "email": "davis@gmail.com",
-      "address": "Dschang, Cameroun"
     },
     {
       "id": "0f46",
@@ -251,56 +131,6 @@
       "address": "Yaounde, Cameroun"
     },
     {
-      "id": "b16b",
-      "name": "John Smith",
-      "notes": "tres motivee",
-      "qualification": "Dr",
-      "profession": "Cardiologist",
-      "phone": "+237 677345733",
-      "email": "john@gmail.com",
-      "address": "Yaounde, Cameroun"
-    },
-    {
-      "id": "511b",
-      "name": "Laura Thompson",
-      "notes": "tres motivee comme docteur ",
-      "qualification": "Dr",
-      "profession": "Ophthalmologist",
-      "phone": "+237 6747729333",
-      "email": "laura@gmail.com",
-      "address": "Douala, Cameroun"
-    },
-    {
-      "id": "c3bc",
-      "name": "John Smith  1",
-      "notes": "tres motivee",
-      "qualification": "Dr",
-      "profession": "Cardiologist",
-      "phone": "+237 677345741",
-      "email": "john@gmail.com",
-      "address": "Yaounde, Cameroun"
-    },
-    {
-      "id": "f887",
-      "name": "Laura Thompson",
-      "notes": "Bon medecin",
-      "qualification": "Dr",
-      "profession": "Ophthalmologist",
-      "phone": "+237 674772917",
-      "email": "laura@gmail.com",
-      "address": "Douala, Cameroun"
-    },
-    {
-      "id": "36c4",
-      "name": "Lena Toukam",
-      "notes": "Je sais bien prendre soin de mes patients",
-      "qualification": "Dr",
-      "profession": "ophthalmologist",
-      "phone": "656346777888",
-      "email": "lfogouang39@gmail.com",
-      "address": "ari"
-    },
-    {
       "id": "49fd",
       "name": "Lena Toukam",
       "notes": "Je sais bien prendre soin de mes patients",
@@ -311,16 +141,6 @@
       "address": "ari"
     },
     {
-      "id": "10d7",
-      "name": "Lena Toukam",
-      "notes": "Je sais bien prendre soin de mes patients",
-      "qualification": "Dr",
-      "profession": "ophthalmologist",
-      "phone": "656346777889",
-      "email": "lfogouang39@gmail.com",
-      "address": "ari depot guiness"
-    },
-    {
       "id": "5de6",
       "name": "Vanelle Terouta",
       "notes": "tres motivee",
@@ -329,36 +149,6 @@
       "phone": "3333333333",
       "email": "fogouangloic10@gmail.com",
       "address": "foroke"
-    },
-    {
-      "name": "Vanelle Terouta 1112",
-      "notes": "tres motivee",
-      "qualification": "Dr",
-      "profession": "Neurologist",
-      "phone": "3333333333",
-      "email": "fogouangloic10@gmail.com",
-      "address": "foroke",
-      "id": "19c2"
-    },
-    {
-      "name": "",
-      "notes": "",
-      "qualification": "Dr",
-      "profession": "",
-      "phone": "",
-      "email": "",
-      "address": "",
-      "id": "ea9a"
-    },
-    {
-      "name": "hella hello hello",
-      "notes": "vvvvvv",
-      "qualification": "Dr",
-      "profession": "Neurologist",
-      "phone": "34444444444",
-      "email": "lenaTalla@gmail.com",
-      "address": "ari",
-      "id": "9b09"
     }
   ],
   "prescriptions": [

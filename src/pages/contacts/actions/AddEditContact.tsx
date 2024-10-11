@@ -20,6 +20,7 @@ import {
 } from "../../../utils/ValidationContact";
 
 import { IContact } from "../../../models/Contact";
+import Header from "../../../components/header/Header";
 
 export default function AddEditContact() {
   const [error, setError] = useState(null);
@@ -109,7 +110,8 @@ export default function AddEditContact() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(newContact),
-        });
+        })
+    
       }else{// If validation passes, make the API call to submit the data
       response = await fetch("http://localhost:3000/contacts", {
         method: "POST",
@@ -166,20 +168,17 @@ export default function AddEditContact() {
 
   return (
     <>
-      <div className="add-container">
-        <div className="headerContainer">
-          <IconButton
-            type="button"
-            sx={{ paddingLeft: "0px" }}
-            aria-label="arrowBack"
-            onClick= {() => {navigate("/contacts")}}
-          >
-            <ArrowBackIcon />
-          </IconButton>
-          <Typography className="textTypography" paddingLeft={0}>
-            New doctor
-          </Typography>
-        </div>
+      <div>
+        <Header
+          title="New doctor"
+          showBackButton={true}
+          onBackButtonClick={() => {
+            navigate("/contacts");
+          }}
+        
+        />
+      </div>
+      
         <div className="infoContact">
           <form onSubmit={handleSubmit}>
             <div className="infoContent">
@@ -317,8 +316,11 @@ export default function AddEditContact() {
                 helperText={errors.notes}
                 placeholder="Notes"
                 sx={{ width: "100%", color: "Primary", marginBottom: 2 }}
+                multiline
+                maxRows={4}
                 slotProps={{
                   input: {
+                    sx: {display:"flex", alignItems:"start"},
                     startAdornment: (
                       <InputAdornment position="start">
                         <img src={Note} alt="note" />
@@ -344,7 +346,7 @@ export default function AddEditContact() {
             </div>
           </form>
         </div>
-      </div>
+      
     </>
   );
 }

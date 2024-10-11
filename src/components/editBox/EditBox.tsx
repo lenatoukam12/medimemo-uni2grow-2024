@@ -37,11 +37,26 @@ export default function EditBox(props:IEditBox): JSX.Element {
     const handleExit = () => {
       setOpenModal(false);
     } 
-    const handleDelete = () => {
+    const handleOpenDelete = (event: React.MouseEvent<HTMLElement>) => {
+      event.stopPropagation();
       setOpenModal(true);
-      handleClose();
     };
+
+    const handleDelete = async () => {
+      if(props.delete){
+        try {
+          const response = await fetch(props.delete, {
+              method: 'DELETE',
+          });
   
+          if (response.ok) {
+             navigate("/contacts");
+          }
+        } catch (error) {
+          console.error('Erreur:', error);
+        }
+      }
+    } 
 
   return (
     <React.Fragment>
@@ -94,7 +109,7 @@ export default function EditBox(props:IEditBox): JSX.Element {
           </ListItemIcon >
           Edit
         </MenuItem>
-        <MenuItem onClick={handleDelete} >
+        <MenuItem onClick={handleOpenDelete} >
           <ListItemIcon>
             <CloseIcon />
           </ListItemIcon>
@@ -106,16 +121,14 @@ export default function EditBox(props:IEditBox): JSX.Element {
      <DeleteBoxView 
       open={openModal} 
       onDisagree={handleExit} 
-      title1="Deletion" 
-      title2="Confirmation" 
+      title="Deletion Confirmation" 
       icon={<ReportGmailerrorredIcon />} 
       body="Do you really want to delete this contact? Allentered data wil be lost and cannot be recovered." 
-      onAgree={handleExit} 
-      agreeIcon={<ClearIcon/>} 
-      disagreeIcon={<ArrowBackIosNewIcon />} 
+      onAgree={handleDelete} 
+      agreeIcon={<ClearIcon sx={{height:15, width:15}}/>} 
+      disagreeIcon={<ArrowBackIosNewIcon sx={{height:15, width:15}} />} 
       agreeMessage="Delete " 
       disagreeMessage="Back"/>}
-
     </React.Fragment>
     )
 }

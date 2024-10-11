@@ -1,4 +1,4 @@
-import { Button, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import CallPhone from "../../../assets/images/viewContact/white_call (1).svg";
 import Email from "../../../assets/images/viewContact/white_mail (1).svg";
 import View from "../../../assets/images/viewContact/white_location_on (1).svg";
@@ -14,7 +14,7 @@ import "./ViewContact.css";
 import Header from "../../../components/header/Header";
 import EditBox from "../../../components/editBox/EditBox";
 
-export default function ViewContact() {
+ function ViewContact() {
   const { id } = useParams<{ id?: string }>();
   const [contact, setContact] = useState<IContact | null>(null);
   const [loading, setLoading] = useState(true);
@@ -47,7 +47,7 @@ export default function ViewContact() {
   if (error) return <div>Error</div>;
 
   const EditBoxView: string = `/addeditcontact/${id}`;
-  const DeleteBoxView: string = `/contacts/${id}`;
+  const DeleteBoxView: string = `http://localhost:3000/contacts/${id}`;
 
 
   return (
@@ -158,8 +158,11 @@ export default function ViewContact() {
                   fontSize: 14,
                   fontWeight: 400,
                   lineHeight: 2,
+                  wordWrap: "breck-word",
+                  overfloWrap: "breck-word",
+                  whiteSpace: "normal",
                 }}
-                width={240}
+                // width={240}
                 height="auto"
               >
                 {contact?.notes}
@@ -171,3 +174,5 @@ export default function ViewContact() {
     </>
   );
 }
+
+export default ViewContact;
