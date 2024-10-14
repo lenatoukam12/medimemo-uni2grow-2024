@@ -1,5 +1,4 @@
-import { TextField, Typography, Button, IconButton } from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { TextField, Typography, Button } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import Stethoscope from "../../../assets/images/contact/addeditcontact/stethoscope (1).svg";
 import Specialty from "../../../assets/images/contact/addeditcontact/clinical_notes.svg";
@@ -18,31 +17,26 @@ import {
   validateContactForm,
   validationContactField,
 } from "../../../utils/ValidationContact";
-
 import { IContact } from "../../../models/Contact";
 import Header from "../../../components/header/Header";
+import { useFormik } from "formik";
+import * as Yup from "yup"; 
+
+const validationSchema = Yup.object({
+  name: Yup.string().required("Name is required"),
+  profession: Yup.string().required("Specialty is required"),
+  phone: Yup.string()
+    .required("Phone number is required")
+    .matches(/^\d+$/, "Phone number must be numeric"),
+  email: Yup.string().email("Invalid email format"),
+  address: Yup.string(),
+  notes: Yup.string()
+});
 
 export default function AddEditContact() {
   const [error, setError] = useState(null);
   const { id } = useParams<{ id?: string }>();
   const isEditing = !!id;
-  const [contact, setContact] = useState<formValues>({
-    name: "",
-    profession: "",
-    phone: "",
-    email: "",
-    address: "",
-    notes: "",
-  });
-
-  const [errors, setErrors] = useState<formError>({
-    name: "",
-    profession: "",
-    phone: "",
-    email: "",
-    address: "",
-    notes: "",
-  });
 
   const [labelNable, setLabelNable] = useState({
     name: false,
@@ -52,6 +46,7 @@ export default function AddEditContact() {
     address: false,
     notes: false,
   });
+  const navigate = useNavigate();
 
   const handleLabelNable = (field: keyof IContact) => {
     setLabelNable({
@@ -60,48 +55,28 @@ export default function AddEditContact() {
     });
   };
 
-  const navigate = useNavigate();
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const fieldName = e.target.name;
-    const value = e.target.value;
-    const error = validationContactField(fieldName, value);
-
-    setContact({
-      ...contact,
-      [fieldName]: value,
-    });
-
-    setErrors((prevState) => ({
-      ...prevState,
-      [fieldName]: error || "",
-    }));
-  };
-
-  const handleSubmit = async (
-    e: React.FormEvent<HTMLFormElement>
-  ): Promise<void> => {
-    e.preventDefault();
-
-    // Validate the entire form before proceeding
-    const validationErrors = validateContactForm(contact);
-
-    // If there are validation errors, update the errors state and stop submission
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors); // Set the validation errors to the state
-      return; // Stop submission if validation fails
-    }
-
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      profession: "",
+      phone: "",
+      email: "",
+      address: "",
+      notes: ""
+    },
+    validationSchema,
+    onSubmit: async (values) => {
     try {
-      const newContact: IContact = {
-        name: contact.name,
-        notes: contact.notes,
-        qualification: "Dr",
-        profession: contact.profession,
-        phone: contact.phone,
-        email: contact.email,
-        address: contact.address,
-      };
+        const titre = "Dr";
+        const newContact = {
+          name: values.name,
+          notes: values.notes,
+          qualification: titre,
+          profession: values.profession,
+          phone: values.phone,
+          email: values.email,
+          address: values.address
+        };
       let response;
       if(isEditing){
         response = await fetch(`http://localhost:3000/contacts/${id}`, {
@@ -122,26 +97,17 @@ export default function AddEditContact() {
       });}
 
       if (response.ok) {
-        setContact({
-          name: "",
-          notes: "",
-          profession: "",
-          phone: "",
-          email: "",
-          address: "",
-        });
-        //alert("Contact added successfully!");
-        const savedContact = await response.json(); // Get the saved contact with the ID
+        formik.resetForm();
+        const savedContact = await response.json(); 
         navigate("/contacts", { state: { newContact: savedContact } });
       } else {
-        //alert("Error adding contact.");
         navigate("/contacts");
       }
     } catch (error) {
       console.error("Error:", error);
     }
-  };
-
+  }
+});
 
   useEffect (() => {
     if(isEditing){
@@ -152,7 +118,14 @@ export default function AddEditContact() {
           throw new Error("Network response was not ok");
         }
         const data: formValues = await response.json();
-        setContact(data);
+        formik.setValues({
+          name: data.name || "",
+          notes: data.notes || "",
+          profession: data.profession || "",
+          phone: data.phone || "",
+          email: data.email || "",
+          address: data.address || ""
+        });
       } catch (err) {
         setError(error);
       }
@@ -180,7 +153,7 @@ export default function AddEditContact() {
       </div>
       
         <div className="infoContact">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={formik.handleSubmit}>
             <div className="infoContent">
             <div className="listInfo">
               <TextField
@@ -188,10 +161,15 @@ export default function AddEditContact() {
                 onFocus={() => handleLabelNable("name")}
                 label={labelNable.name ? "Name" : ""}
                 name="name"
-                value={contact.name}
-                onChange={handleChange}
-                error={!!errors.name}
-                helperText={errors.name}
+                value={formik.values.name}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.name && Boolean(formik.errors.name)}
+                helperText={formik.touched.name && formik.errors.name}
+                // value={contact.name}
+                // onChange={handleChange}
+                // error={!!errors.name}
+                // helperText={errors.name}
                 sx={{ width: "100%", color: "Primary", marginBottom: 2 }}
                 slotProps={{
                   input: {
@@ -221,10 +199,20 @@ export default function AddEditContact() {
                 onFocus={() => handleLabelNable("profession")}
                 label={labelNable.profession ? "Specialty" : ""}
                 name="profession"
-                value={contact.profession}
-                onChange={handleChange}
-                error={!!errors.profession}
-                helperText={errors.profession}
+                value={formik.values.profession}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={
+                  formik.touched.profession &&
+                  Boolean(formik.errors.profession)
+                }
+                helperText={
+                  formik.touched.profession && formik.errors.profession
+                }
+                // value={contact.profession}
+                // onChange={handleChange}
+                // error={!!errors.profession}
+                // helperText={errors.profession}
                 placeholder="Specialty"
                 sx={{ width: "100%", color: "Primary", marginBottom: 2 }}
                 slotProps={{
@@ -243,10 +231,15 @@ export default function AddEditContact() {
                 onFocus={() => handleLabelNable("phone")}
                 label={labelNable.phone ? "Phone number" : ""}
                 name="phone"
-                value={contact.phone}
-                onChange={handleChange}
-                error={!!errors.phone}
-                helperText={errors.phone}
+                value={formik.values.phone}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.phone && Boolean(formik.errors.phone)}
+                helperText={formik.touched.phone && formik.errors.phone}
+                // value={contact.phone}
+                // onChange={handleChange}
+                // error={!!errors.phone}
+                // helperText={errors.phone}
                 placeholder="Phone number"
                 sx={{ width: "100%", color: "Primary", marginBottom: 2 }}
                 slotProps={{
@@ -266,10 +259,15 @@ export default function AddEditContact() {
                 label={labelNable.email ? "E-mail" : ""}
                 name="email"
                 type="email"
-                value={contact.email}
-                onChange={handleChange}
-                error={!!errors.email}
-                helperText={errors.email}
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
+                // value={contact.email}
+                // onChange={handleChange}
+                // error={!!errors.email}
+                // helperText={errors.email}
                 placeholder="E-mail"
                 sx={{ width: "100%", color: "Primary", marginBottom: 2 }}
                 slotProps={{
@@ -288,10 +286,17 @@ export default function AddEditContact() {
                 onFocus={() => handleLabelNable("address")}
                 label={labelNable.address ? "Address" : ""}
                 name="address"
-                value={contact.address}
-                onChange={handleChange}
-                error={!!errors.address}
-                helperText={errors.address}
+                value={formik.values.address}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={
+                  formik.touched.address && Boolean(formik.errors.address)
+                }
+                helperText={formik.touched.address && formik.errors.address}
+                // value={contact.address}
+                // onChange={handleChange}
+                // error={!!errors.address}
+                // helperText={errors.address}
                 placeholder="Address"
                 sx={{ width: "100%", color: "Primary", marginBottom: 2 }}
                 slotProps={{
@@ -310,10 +315,15 @@ export default function AddEditContact() {
                 onFocus={() => handleLabelNable("notes")}
                 label={labelNable.notes ? "Notes" : ""}
                 name="notes"
-                value={contact.notes}
-                onChange={handleChange}
-                error={!!errors.notes}
-                helperText={errors.notes}
+                value={formik.values.notes}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.notes && Boolean(formik.errors.notes)}
+                helperText={formik.touched.notes && formik.errors.notes}
+                // value={contact.notes}
+                // onChange={handleChange}
+                // error={!!errors.notes}
+                // helperText={errors.notes}
                 placeholder="Notes"
                 sx={{ width: "100%", color: "Primary", marginBottom: 2 }}
                 multiline

@@ -91,26 +91,6 @@
       "notes": ""
     },
     {
-      "id": "7414",
-      "name": "Hema celine",
-      "notes": "Bon medecin",
-      "qualification": "Dr",
-      "profession": "Neurologist",
-      "phone": "555555",
-      "email": "fortunetako@gmail.com",
-      "address": "foroke"
-    },
-    {
-      "id": "3bde",
-      "name": "Sorelle Tejou",
-      "notes": "Consultation gratuit pour mes anciens clients",
-      "qualification": "Dr",
-      "profession": "ophthalmologist",
-      "phone": "555555",
-      "email": "sorelletejou@gmail.com",
-      "address": "kelem"
-    },
-    {
       "id": "23d4",
       "name": "Laura Thompson",
       "notes": "Bon medecin",
@@ -121,33 +101,13 @@
       "address": "Douala, Cameroun"
     },
     {
-      "id": "0f46",
-      "name": "John Smith",
-      "notes": "Bon medecin",
-      "qualification": "Dr",
-      "profession": "Cardiologist",
-      "phone": "+237 677345741",
-      "email": "john@gmail.com",
-      "address": "Yaounde, Cameroun"
-    },
-    {
-      "id": "49fd",
-      "name": "Lena Toukam",
-      "notes": "Je sais bien prendre soin de mes patients",
-      "qualification": "Dr",
-      "profession": "ophthalmologist",
-      "phone": "656346777889",
-      "email": "lfogouang39@gmail.com",
-      "address": "ari"
-    },
-    {
-      "id": "5de6",
-      "name": "Vanelle Terouta",
-      "notes": "tres motivee",
+      "id": "60fb",
+      "name": "taylor leukam",
+      "notes": "très déterminé",
       "qualification": "Dr",
       "profession": "Neurologist",
-      "phone": "3333333333",
-      "email": "fogouangloic10@gmail.com",
+      "phone": "7777777777777",
+      "email": "taylor@gmail.com",
       "address": "foroke"
     }
   ],
