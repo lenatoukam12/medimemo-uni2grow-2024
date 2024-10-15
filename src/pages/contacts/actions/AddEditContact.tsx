@@ -20,7 +20,7 @@ import {
 import { IContact } from "../../../models/Contact";
 import Header from "../../../components/header/Header";
 import { useFormik } from "formik";
-import * as Yup from "yup"; 
+import * as Yup from "yup";
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),
@@ -30,7 +30,7 @@ const validationSchema = Yup.object({
     .matches(/^\d+$/, "Phone number must be numeric"),
   email: Yup.string().email("Invalid email format"),
   address: Yup.string(),
-  notes: Yup.string()
+  notes: Yup.string(),
 });
 
 export default function AddEditContact() {
@@ -62,11 +62,11 @@ export default function AddEditContact() {
       phone: "",
       email: "",
       address: "",
-      notes: ""
+      notes: "",
     },
     validationSchema,
     onSubmit: async (values) => {
-    try {
+      try {
         const titre = "Dr";
         const newContact = {
           name: values.name,
@@ -75,69 +75,68 @@ export default function AddEditContact() {
           profession: values.profession,
           phone: values.phone,
           email: values.email,
-          address: values.address
+          address: values.address,
         };
-      let response;
-      if(isEditing){
-        response = await fetch(`http://localhost:3000/contacts/${id}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newContact),
-        })
-    
-      }else{// If validation passes, make the API call to submit the data
-      response = await fetch("http://localhost:3000/contacts", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newContact),
-      });}
-
-      if (response.ok) {
-        formik.resetForm();
-        const savedContact = await response.json(); 
-        navigate("/contacts", { state: { newContact: savedContact } });
-      } else {
-        navigate("/contacts");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  }
-});
-
-  useEffect (() => {
-    if(isEditing){
-    const fetchContact = async () => {
-      try {
-        const response = await fetch(`http://localhost:3000/contacts/${id}`);
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
+        let response;
+        if (isEditing) {
+          response = await fetch(`http://localhost:3000/contacts/${id}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newContact),
+          });
+        } else {
+          // If validation passes, make the API call to submit the data
+          response = await fetch("http://localhost:3000/contacts", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newContact),
+          });
         }
-        const data: formValues = await response.json();
-        formik.setValues({
-          name: data.name || "",
-          notes: data.notes || "",
-          profession: data.profession || "",
-          phone: data.phone || "",
-          email: data.email || "",
-          address: data.address || ""
-        });
-      } catch (err) {
-        setError(error);
-      }
-    };
 
-    fetchContact();
-  };
-  }, [id,isEditing]);
+        if (response.ok) {
+          formik.resetForm();
+          const savedContact = await response.json();
+          navigate("/contacts", { state: { newContact: savedContact } });
+        } else {
+          navigate("/contacts");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    },
+  });
+
+  useEffect(() => {
+    if (isEditing) {
+      const fetchContact = async () => {
+        try {
+          const response = await fetch(`http://localhost:3000/contacts/${id}`);
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          const data: formValues = await response.json();
+          formik.setValues({
+            name: data.name || "",
+            notes: data.notes || "",
+            profession: data.profession || "",
+            phone: data.phone || "",
+            email: data.email || "",
+            address: data.address || "",
+          });
+        } catch (err) {
+          setError(error);
+        }
+      };
+
+      fetchContact();
+    }
+  }, [id, isEditing]);
 
   if (error) return <div>Error</div>;
-  
-
 
   return (
     <>
@@ -148,13 +147,12 @@ export default function AddEditContact() {
           onBackButtonClick={() => {
             navigate("/contacts");
           }}
-        
         />
       </div>
-      
-        <div className="infoContact">
-          <form onSubmit={formik.handleSubmit}>
-            <div className="infoContent">
+
+      <div className="infoContact">
+        <form onSubmit={formik.handleSubmit}>
+          <div className="infoContent">
             <div className="listInfo">
               <TextField
                 id="outlined-basic"
@@ -166,10 +164,6 @@ export default function AddEditContact() {
                 onBlur={formik.handleBlur}
                 error={formik.touched.name && Boolean(formik.errors.name)}
                 helperText={formik.touched.name && formik.errors.name}
-                // value={contact.name}
-                // onChange={handleChange}
-                // error={!!errors.name}
-                // helperText={errors.name}
                 sx={{ width: "100%", color: "Primary", marginBottom: 2 }}
                 slotProps={{
                   input: {
@@ -203,16 +197,11 @@ export default function AddEditContact() {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 error={
-                  formik.touched.profession &&
-                  Boolean(formik.errors.profession)
+                  formik.touched.profession && Boolean(formik.errors.profession)
                 }
                 helperText={
                   formik.touched.profession && formik.errors.profession
                 }
-                // value={contact.profession}
-                // onChange={handleChange}
-                // error={!!errors.profession}
-                // helperText={errors.profession}
                 placeholder="Specialty"
                 sx={{ width: "100%", color: "Primary", marginBottom: 2 }}
                 slotProps={{
@@ -236,10 +225,6 @@ export default function AddEditContact() {
                 onBlur={formik.handleBlur}
                 error={formik.touched.phone && Boolean(formik.errors.phone)}
                 helperText={formik.touched.phone && formik.errors.phone}
-                // value={contact.phone}
-                // onChange={handleChange}
-                // error={!!errors.phone}
-                // helperText={errors.phone}
                 placeholder="Phone number"
                 sx={{ width: "100%", color: "Primary", marginBottom: 2 }}
                 slotProps={{
@@ -264,10 +249,6 @@ export default function AddEditContact() {
                 onBlur={formik.handleBlur}
                 error={formik.touched.email && Boolean(formik.errors.email)}
                 helperText={formik.touched.email && formik.errors.email}
-                // value={contact.email}
-                // onChange={handleChange}
-                // error={!!errors.email}
-                // helperText={errors.email}
                 placeholder="E-mail"
                 sx={{ width: "100%", color: "Primary", marginBottom: 2 }}
                 slotProps={{
@@ -289,14 +270,8 @@ export default function AddEditContact() {
                 value={formik.values.address}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                error={
-                  formik.touched.address && Boolean(formik.errors.address)
-                }
+                error={formik.touched.address && Boolean(formik.errors.address)}
                 helperText={formik.touched.address && formik.errors.address}
-                // value={contact.address}
-                // onChange={handleChange}
-                // error={!!errors.address}
-                // helperText={errors.address}
                 placeholder="Address"
                 sx={{ width: "100%", color: "Primary", marginBottom: 2 }}
                 slotProps={{
@@ -320,17 +295,13 @@ export default function AddEditContact() {
                 onBlur={formik.handleBlur}
                 error={formik.touched.notes && Boolean(formik.errors.notes)}
                 helperText={formik.touched.notes && formik.errors.notes}
-                // value={contact.notes}
-                // onChange={handleChange}
-                // error={!!errors.notes}
-                // helperText={errors.notes}
                 placeholder="Notes"
                 sx={{ width: "100%", color: "Primary", marginBottom: 2 }}
                 multiline
                 maxRows={4}
                 slotProps={{
                   input: {
-                    sx: {display:"flex", alignItems:"start"},
+                    sx: { display: "flex", alignItems: "start" },
                     startAdornment: (
                       <InputAdornment position="start">
                         <img src={Note} alt="note" />
@@ -341,22 +312,20 @@ export default function AddEditContact() {
                 variant="outlined"
               />
             </div>
-            </div>
-           
+          </div>
 
-            <div className="saveContainer">
-              <Button
-                className="saveButton"
-                type="submit"
-                sx={{ backgroundColor: "#F00", borderRadius: 4, padding: 1 }}
-              >
-                <img src={Save} alt="save" />
-                <Typography className="saveText">Save</Typography>
-              </Button>
-            </div>
-          </form>
-        </div>
-      
+          <div className="saveContainer">
+            <Button
+              className="saveButton"
+              type="submit"
+              sx={{ backgroundColor: "#F00", borderRadius: 4, padding: 1 }}
+            >
+              <img src={Save} alt="save" />
+              <Typography className="saveText">Save</Typography>
+            </Button>
+          </div>
+        </form>
+      </div>
     </>
   );
 }

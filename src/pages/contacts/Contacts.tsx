@@ -104,6 +104,7 @@ function Contacts() {
                     paddingTop: 1.5,
                     paddingBottom: 1.5,
                   }}
+                  onClick= {() => {navigate(`/viewContact/${contact.id}`)}}
                 >
                   <IconButton
                     type="button"

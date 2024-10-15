@@ -109,6 +109,16 @@
       "phone": "7777777777777",
       "email": "taylor@gmail.com",
       "address": "foroke"
+    },
+    {
+      "id": "3a89",
+      "name": "Fogouang-nangna Loique",
+      "notes": "bon en pediatrie",
+      "qualification": "Dr",
+      "profession": "Pediatrician",
+      "phone": "656585534",
+      "email": "fogouangloic10@gmail.com",
+      "address": "foroke"
     }
   ],
   "prescriptions": [
